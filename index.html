@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asama.ai — AI Engineering Assignment | Karthik Katari</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 860px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1f2328; }
+    header { border-bottom: 2px solid #d0d7de; padding-bottom: 16px; margin-bottom: 28px; }
+    h1 { margin: 0 0 6px; font-size: 1.8rem; }
+    .meta { color: #57606a; font-size: 0.95rem; }
+    .card { border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #f6f8fa; }
+    .card h2 { margin-top: 0; font-size: 1.25rem; color: #0969da; }
+    code { background: #eff1f3; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    a.btn { display: inline-block; background: #0969da; color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Asama.ai — AI Engineering Technical Assignment</h1>
+    <div class="meta">Submitted by <strong>Karthik Katari</strong> &bull; Two Runnable Python Codebases &amp; Architecture Report</div>
+    <a class="btn" href="https://github.com/karthik-k27/asama-ai-assignment" target="_blank">View Full Source Code on GitHub &rarr;</a>
+  </header>
+
+  <div class="card">
+    <h2>Problem 1: Social Network for AI Agents (<code>problem1_agent_social_network/</code>)</h2>
+    <p>Event-driven B2B agent network where enterprise agents (Swiggy, PhonePe, HDFC Bank, Bajaj Auto) publish updates and receive precision notifications via a <strong>3-Stage Semantic Relevance Routing</strong> pipeline:</p>
+    <ul>
+      <li><strong>Stage 1 (SQL Guardrails):</strong> Filters inactive agents, self-posts, low-trust accounts (&lt; 0.3), and blocked industries.</li>
+      <li><strong>Stage 2 (Vector ANN):</strong> Queries Top-50 candidates via cosine similarity (HNSW in pgvector / runnable SQLite).</li>
+      <li><strong>Stage 3 (Rerank &amp; Gate):</strong> Scores cross-domain synergy, subscriptions, and closed-loop engagement feedback; notifies Top-5 (&ge; 0.75).</li>
+      <li><strong>Trust &amp; Safety:</strong> Prompt-injection sanitization, strict data/prompt isolation, and HMAC-SHA256 signed webhooks.</li>
+      <li><strong>Verification:</strong> All 4 tests in <code>test_problem1.py</code> pass (0.093s); Diwali post routed to PhonePe (0.9916) &amp; HDFC Bank (0.9829) while dropping Bajaj Auto.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Problem 2: Local Linux Hardware Q&amp;A Assistant (<code>problem2_linux_hw_assistant/</code>)</h2>
+    <p>Local CLI assistant answering natural-language hardware questions using deterministic, read-only system inspection:</p>
+    <ul>
+      <li><strong>Strict Allow-List &amp; No Shell Execution:</strong> Maps intent to pre-defined tool IDs (<code>lscpu</code>, <code>lsblk -J</code>, <code>free -b</code>, <code>dmidecode -t memory</code>, <code>lspci -nn</code>) via <code>subprocess.run(..., shell=False)</code>; blocks shell metacharacters.</li>
+      <li><strong>Permission &amp; Hallucination Safeguards:</strong> Uses non-interactive <code>sudo -n</code> fallback for root-only DMI tables and normalizes stdout into typed JSON schemas so missing fields stay explicitly unknown.</li>
+    </ul>
+  </div>
+</body>
+</html>
